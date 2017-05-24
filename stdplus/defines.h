@@ -32,5 +32,8 @@
 /* inline functions */
 #define STDPLUS_INLINE static __inline
 
+/* typeof macro */
+#define STDPLUS_TYPEOF __typeof
+
 #endif
 

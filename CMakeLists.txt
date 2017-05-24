@@ -10,6 +10,17 @@ configure_file(
 include_directories("${PROJECT_SOURCE_DIR}")
 include_directories("${PROJECT_BINARY_DIR}")
 
+add_definitions(
+  -Wall
+  -Wextra
+  -Werror
+  -Wundef
+  -Wshadow
+  -Wcast-align
+  -Wstrict-prototypes
+  -Wmissing-prototypes
+  -pedantic)
+
 add_library(stdplus
   stdplus/mem.c)
 

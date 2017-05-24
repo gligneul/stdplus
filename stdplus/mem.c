@@ -27,6 +27,7 @@
 #include <stdplus/mem.h>
 
 static void *mem_alloc_(void *addr, size_t oldsize, size_t newsize) {
+  (void)oldsize;
   return newsize != 0 ? realloc(addr, newsize) : (free(addr), NULL);
 }
 
