@@ -33,6 +33,9 @@
  * Notice that this is a function pointer, so it can by monkey patched */
 extern void *(*mem_alloc)(void *addr, size_t oldsize, size_t newsize);
 
+/* Actual mem allocation fuction */
+void *mem_alloc_(void *addr, size_t oldsize, size_t newsize);
+
 /* Useful macros */
 #define mem_new(T) (T *)mem_alloc(NULL, 0, sizeof(T))
 #define mem_delete(ptr) mem_alloc(ptr, sizeof(*ptr), 0)

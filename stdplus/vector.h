@@ -49,9 +49,9 @@ typedef struct Vector(T) { \
 
 /* Change the vector capacity */
 #define vec_changecap_(v, newcap) \
-  (((v).data = mem_alloc((v).data, (v).capacity * sizeof(*(v).data), \
-                         newcap * vec_elemsize_(v))), \
-   ((v).capacity = newcap), (void)0)
+  (((v).data = mem_alloc((v).data, (v).capacity * vec_elemsize_(v), \
+                         (newcap) * vec_elemsize_(v))), \
+   ((v).capacity = (newcap)), (void)0)
 
 /* Increase the vector capacity if necessary */
 #define vec_grow_(v) \
@@ -66,7 +66,10 @@ typedef struct Vector(T) { \
 
 /** Destroy de vector */
 #define vec_close(v) \
-  (mem_alloc((v).data, (v).capacity * vec_elemsize_(v), 0), vec_init(v))
+  (((v).capacity != 0 ? \
+    mem_alloc((v).data, (v).capacity * vec_elemsize_(v), 0) : \
+    NULL), \
+   vec_init(v))
 
 /** Obtain the vector capacity */
 #define vec_capacity(v) \
@@ -113,8 +116,8 @@ typedef struct Vector(T) { \
 #define vec_insert(v, pos, value) do { \
   size_t _i; \
   vec_grow_(v); \
-  for (i = (v).size; i > (pos); --i) \
-    (v).data[i] = (v).data[i - 1]; \
+  for (_i = (v).size; _i > (pos); --_i) \
+    (v).data[_i] = (v).data[_i - 1]; \
   (v).data[pos] = (value); \
   (v).size++; \
 } while(0)
@@ -122,7 +125,8 @@ typedef struct Vector(T) { \
 /** Erase the element at the required position */
 #define vec_erase(v, pos) do { \
   size_t _i; \
-  for (i = (pos); i < (v).size; ++i) \
+  for (_i = (pos); _i < (v).size - 1; ++_i) \
+    (v).data[_i] = (v).data[_i + 1]; \
   (v).size--; \
 } while(0)
 

@@ -30,6 +30,11 @@ SET(HEADERS ${HEADERS} "${PROJECT_BINARY_DIR}/stdplus/version.h")
 install(TARGETS stdplus DESTINATION lib)
 install(FILES ${HEADERS} DESTINATION include/stdplus)
 
-add_executable(app main.c)
-target_link_libraries(app stdplus)
+include(CTest)
+enable_testing()
+add_custom_target(build-tests)
+add_executable(vectest EXCLUDE_FROM_ALL tests/vectest.c)
+add_dependencies(build-tests vectest)
+target_link_libraries(vectest stdplus)
+add_test(vectest vectest)
 
