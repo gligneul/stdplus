@@ -25,8 +25,9 @@ add_definitions(
 add_library(stdplus
   stdplus/mem.c)
 
-FILE(GLOB HEADERS "${PROJECT_SOURCE_DIR}/stdplus/*.h")
-SET(HEADERS ${HEADERS} "${PROJECT_BINARY_DIR}/stdplus/version.h")
+SET(HEADERS
+  "${PROJECT_SOURCE_DIR}/stdplus/*.h"
+  "${PROJECT_BINARY_DIR}/stdplus/version.h")
 
 install(TARGETS stdplus DESTINATION lib)
 install(FILES ${HEADERS} DESTINATION include/stdplus)

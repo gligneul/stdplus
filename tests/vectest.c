@@ -24,7 +24,7 @@
 
 #include <assert.h>
 #include <stdio.h>
-#include <stdplus.h>
+#include <stdplus/stdplus.h>
 
 static int usedmem = 0;
 static void *checkmem(void *addr, size_t oldsize, size_t newsize) {
