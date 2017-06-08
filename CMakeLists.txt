@@ -11,6 +11,7 @@ include_directories("${PROJECT_SOURCE_DIR}")
 include_directories("${PROJECT_BINARY_DIR}")
 
 add_definitions(
+  -std=c89
   -Wall
   -Wextra
   -Werror
