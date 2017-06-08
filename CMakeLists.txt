@@ -25,18 +25,15 @@ add_definitions(
 add_library(stdplus
   stdplus/mem.c)
 
-SET(HEADERS
+SET(stdplus_headers
   "${PROJECT_SOURCE_DIR}/stdplus/*.h"
   "${PROJECT_BINARY_DIR}/stdplus/version.h")
 
 install(TARGETS stdplus DESTINATION lib)
-install(FILES ${HEADERS} DESTINATION include/stdplus)
+install(FILES ${stdplus_headers} DESTINATION include/stdplus)
 
-include(CTest)
-enable_testing()
-add_custom_target(build-tests)
-add_executable(vectest EXCLUDE_FROM_ALL tests/vectest.c)
-add_dependencies(build-tests vectest)
-target_link_libraries(vectest stdplus)
-add_test(vectest vectest)
+if(ENABLE_STDPLUS_TESTS)
+  enable_testing()
+  add_subdirectory(tests)
+endif(ENABLE_STDPLUS_TESTS)
 
