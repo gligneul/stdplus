@@ -1,8 +1,8 @@
+dist: trusty
 language: c
+compiler: gcc
 addons:
   apt:
-    sources:
-      - george-edison55-precise-backports
     packages:
-      - cmake-data
       - cmake
+script: cmake -DENABLE_STDPLUS_TESTS=1 . && make && make test
