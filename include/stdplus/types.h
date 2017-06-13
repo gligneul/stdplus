@@ -22,15 +22,24 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef stdplus_stdplus_h
-#define stdplus_stdplus_h
+/* Basic type definitions */
+/* TODO generate this header in an pre processing step */
 
-/* Include all headers */
-#include <stdplus/defines.h>
-#include <stdplus/mem.h>
-#include <stdplus/types.h>
-#include <stdplus/vector.h>
-#include <stdplus/version.h>
+#ifndef stdplus_types_h
+#define stdplus_types_h
+
+typedef char i8;
+typedef short i16;
+typedef int i32;
+typedef long i64;
+
+typedef unsigned char ui8;
+typedef unsigned short ui16;
+typedef unsigned int ui32;
+typedef unsigned long ui64;
+
+typedef float f32;
+typedef double f64;
 
 #endif
 
