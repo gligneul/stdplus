@@ -199,12 +199,12 @@ int main(void) {
     assert(usedmem == 0);
   }
 
-  /* test foreach */ {
+  /* test for*/ {
     size_t i, n = 100;
     Vector(int) v;
     vec_init(v);
     for (i = 0; i < n; ++i) vec_push(v, i);
-    vec_foreach(v, j, assert(vec_get(v, j) == (int)j));
+    vec_for(v, j, assert(vec_get(v, j) == (int)j));
     vec_close(v);
     assert(usedmem == 0);
   }

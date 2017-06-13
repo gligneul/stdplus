@@ -81,7 +81,7 @@ typedef struct Vector(T) { \
   ((newcap) == 0 ? \
    vec_close(v) : \
    (vec_changecap_(v, newcap), \
-    ((v).size > newcap ? ((v).size = newcap, (void)0) : (void)0)))
+    ((v).size > (newcap) ? ((v).size = (newcap), (void)0) : (void)0)))
 
 /** Shrink the vector capacity to the current size */
 #define vec_shrink(v) \
@@ -97,8 +97,8 @@ typedef struct Vector(T) { \
 
 /** Change the vector size */
 #define vec_resize(v, newsize) \
-  ((newsize > (v).capacity ? vec_changecap_(v, newsize) : (void)0), \
-   ((v).size = newsize), (void)0)
+  (((newsize) > (v).capacity ? vec_changecap_(v, newsize) : (void)0), \
+   ((v).size = (newsize)), (void)0)
 
 /** Remove all elements from the vector */ 
 #define vec_clear(v) \
@@ -106,7 +106,7 @@ typedef struct Vector(T) { \
 
 /** Insert an element into the last position */
 #define vec_push(v, value) \
-  (vec_grow_(v), (v).data[(v).size++] = value, (void)0)
+  (vec_grow_(v), (v).data[(v).size++] = (value), (void)0)
 
 /** Remove the last element and return it */
 #define vec_pop(v) \
@@ -136,11 +136,11 @@ typedef struct Vector(T) { \
 
 /** Obtain a reference to the element */
 #define vec_getref(v, pos) \
-  ((v).data + pos)
+  ((v).data + (pos))
 
 /** Set the value of an element */
 #define vec_set(v, pos, value) \
-  ((v).data[pos] = value, (void)0)
+  ((v).data[pos] = (value), (void)0)
 
 /** Obtain the element at the first position */
 #define vec_front(v) \
@@ -154,11 +154,27 @@ typedef struct Vector(T) { \
 #define vec_data(v) \
   ((v).data)
 
-/** Iterates throgh the vector and executes the command */
+/** Iterates throgh the vector and executes the command using an index */
+#define vec_for(v, i, cmd) do { \
+  size_t i; \
+  size_t _n##i = vec_size(v); \
+  for (i = 0; i < _n##i; ++i) { \
+    cmd; \
+  } \
+} while(0)
+
+/** Obtains the type that the vector holds */
+#define vec_typeof(v) \
+  STDPLUS_TYPEOF(*(v).data)
+
+/** Iterates throgh the vector and executes the command using an iterator
+ * (refence to the value) */
 #define vec_foreach(v, it, cmd) do { \
-  size_t it; \
+  size_t _i##it; \
   size_t _n##it = vec_size(v); \
-  for (it = 0; it < _n##it; ++it) { \
+  for (_i##it = 0; _i##it < _n##it; ++_i##it) { \
+    vec_typeof(v) *it = vec_getref(v, _i##it); \
+    (void)it; \
     cmd; \
   } \
 } while(0)
