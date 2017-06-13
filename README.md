@@ -2,9 +2,9 @@
 Lightweight extension for ANSI C89
 
 ## Modules
-- stdplus/vector: Dynamic array (like stl vector)
-
+- stdplus/inttypes: Size of integer types
 - stdplus/mem: Memory allocation utilities
+- stdplus/vector: Dynamic array (like stl vector)
 
 ## How to build
 ```

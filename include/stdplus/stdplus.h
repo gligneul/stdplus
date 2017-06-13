@@ -28,7 +28,7 @@
 /* Include all headers */
 #include <stdplus/defines.h>
 #include <stdplus/mem.h>
-#include <stdplus/types.h>
+#include <stdplus/inttypes.h>
 #include <stdplus/vector.h>
 #include <stdplus/version.h>
 

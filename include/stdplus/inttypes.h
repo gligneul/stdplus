@@ -38,8 +38,5 @@ typedef unsigned short ui16;
 typedef unsigned int ui32;
 typedef unsigned long ui64;
 
-typedef float f32;
-typedef double f64;
-
 #endif
 
